@@ -2,7 +2,7 @@ import React from 'react';
 import { initialState } from '../reducers';
 import reducer from '../reducers';
 import { useReducer } from 'react';
-import { applyNumber, changeOperation, applyDisplay  } from '../actions';
+import { applyNumber, changeOperation, applyDisplay, memoryAdder, memoryApply, clearMemory  } from '../actions';
 
 import './App.css';
 
@@ -23,10 +23,20 @@ function App() {
     dispatch(changeOperation(operator))
   }
 
-  const clearClick = (clear) => {
-    dispatch(applyDisplay(clear))
+  const clearClick = () => {
+    dispatch(applyDisplay())
   }
 
+  const memoryClick = () => {
+    dispatch(memoryAdder())
+  }
+  const applyClick = () => {
+    dispatch(memoryApply())
+}
+
+  const applyClear = () => {
+    dispatch(clearMemory())
+  }
 // }
   //we execute our action and we create our payload and its put into our reducer 
   // And then we call our reducer function because our state has been modified
@@ -48,9 +58,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={memoryClick} />
+              <CalcButton value={"MR"} onClick={applyClick} />
+              <CalcButton value={"MC"} onClick={applyClear} />
             </div>
 
             <div className="row">
